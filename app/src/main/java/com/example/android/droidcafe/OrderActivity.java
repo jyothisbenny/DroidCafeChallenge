@@ -19,7 +19,10 @@ package com.example.android.droidcafe;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * This activity shows the order chosen.  The order is sent as data
@@ -37,5 +40,35 @@ public class OrderActivity extends AppCompatActivity {
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         TextView textView = findViewById(R.id.order_textview);
         textView.setText(message);
+    }
+    public void displayToast(String message) {
+        Toast.makeText(getApplicationContext(), message,
+                Toast.LENGTH_SHORT).show();
+    }
+
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+        // Check which radio button was clicked.
+        switch (view.getId()) {
+            case R.id.sameDay:
+                if (checked)
+                    // Same day service
+                    displayToast(getString(R.string.delivery_option1));
+                break;
+            case R.id.nextDay:
+                if (checked)
+                    // Next day delivery
+                    displayToast(getString(R.string.delivery_option2));
+                break;
+            case R.id.pickup:
+                if (checked)
+                    // Pick up
+                    displayToast(getString(R.string.delivery_option3));
+                break;
+            default:
+                // Do nothing.
+                break;
+        }
     }
 }
