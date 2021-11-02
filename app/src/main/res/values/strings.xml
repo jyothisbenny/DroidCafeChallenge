@@ -31,11 +31,18 @@
     <string name="address_label">Address:</string>
     <string name="address_value_hint">Write your address</string>
     <string name="phone_label">Phone:</string>
-    <string name="phone_hint">Enter your phone number</string>
+    <string name="phone_hint">Enter your phone</string>
     <string name="note_hint">Enter your notes</string>
     <string name="note_label">Note:</string>
     <string name="delivery_text">Choose a delivery option</string>
     <string name="delivery_option1">Same day messenger service</string>
     <string name="delivery_option2">Next day ground delivery</string>
     <string name="delivery_option3">Pick Up</string>
+    <string name="title_activity_order">Order Activity</string>
+    <string-array name="labels_array">
+        <item>Home</item>
+        <item>Work</item>
+        <item>Mobile</item>
+        <item>Other</item>
+    </string-array>
 </resources>

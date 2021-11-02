@@ -19,6 +19,10 @@ package com.example.android.droidcafe;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -28,8 +32,7 @@ import android.widget.Toast;
  * This activity shows the order chosen.  The order is sent as data
  * with the intent to launch this activity.
  */
-public class OrderActivity extends AppCompatActivity {
-
+public class OrderActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +43,17 @@ public class OrderActivity extends AppCompatActivity {
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         TextView textView = findViewById(R.id.order_textview);
         textView.setText(message);
+        Spinner spinner=findViewById(R.id.label_spinner);
+        if(spinner!=null){
+            spinner.setOnItemSelectedListener(this);
+        }
+        ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,R.array.labels_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        if(spinner!=null){
+            spinner.setAdapter(adapter);
+        }
     }
+
     public void displayToast(String message) {
         Toast.makeText(getApplicationContext(), message,
                 Toast.LENGTH_SHORT).show();
@@ -56,6 +69,7 @@ public class OrderActivity extends AppCompatActivity {
                     // Same day service
                     displayToast(getString(R.string.delivery_option1));
                 break;
+
             case R.id.nextDay:
                 if (checked)
                     // Next day delivery
@@ -71,4 +85,14 @@ public class OrderActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        String spinnerLabel = adapterView.getItemAtPosition(i).toString();
+        displayToast(spinnerLabel);
+    }
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+    }
+
 }
